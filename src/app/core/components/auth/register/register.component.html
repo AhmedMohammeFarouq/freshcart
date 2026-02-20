@@ -1,0 +1,137 @@
+<section class="w-3/4 mx-auto">
+  <div>
+    <h1 class="text-xl font-bold my-5">{{"Register Now:"|translate}}</h1>
+
+    @if(errMsg()){
+    <div class="p-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+      <p>{{ errMsg() }}</p>
+    </div>
+    }
+
+    <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()">
+      <div class="mb-3">
+        <label for="name" class="block mb-1 text-sm font-medium text-heading">{{"Name :"|translate}} </label>
+        <input
+          formControlName="name"
+          type="text"
+          id="name"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+        />
+        @if(registerForm.get('name')?.errors && registerForm.get('name')?.touched){
+        <div
+          class="p-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if(registerForm.get('name')?.errors?.['required']){
+          <p>{{"The input requird"|translate}}</p>
+          } @else if (registerForm.get('name')?.errors?.['minlength']){
+          <p>{{"the min length is 2"|translate}}</p>
+          } @else if(registerForm.get('name')?.errors?.['maxlength']){
+          <p>{{"the max length is 20"|translate}}</p>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="email" class="block mb-1 text-sm font-medium text-heading">{{"Email :"|translate}} </label>
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+        />
+        @if(registerForm.get('email')?.errors && registerForm.get('email')?.touched){
+        <div
+          class="p-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if(registerForm.get('email')?.errors?.['required']){
+          <p>{{"The input requird"|translate}}</p>
+          } @else if (registerForm.get('email')?.errors?.['email']){
+          <p>{{"Plaece Enter valid email"|translate}}</p>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="password" class="block mb-1 text-sm font-medium text-heading"
+          >{{"Password :"|translate}}
+        </label>
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+        />
+        @if(registerForm.get('password')?.errors && registerForm.get('password')?.touched){
+        <div
+          class="p-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if(registerForm.get('password')?.errors?.['required']){
+          <p>{{"The input requird"|translate}}</p>
+          } @else if (registerForm.get('password')?.errors?.['pattern']){
+          <p>{{"Plaece Enter valid Password"|translate}}</p>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="rePassword" class="block mb-1 text-sm font-medium text-heading"
+          >{{"Repassword :"|translate}}
+        </label>
+        <input
+          formControlName="rePassword"
+          type="password"
+          id="rePassword"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+        />
+        @if(registerForm.get('rePassword')?.errors && registerForm.get('rePassword')?.touched){
+        <div
+          class="p-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if(registerForm.get('rePassword')?.errors?.['required']){
+          <p>{{"The input requird"|translate}}</p>
+          } @else if (registerForm.errors?.['notmatch']){
+          <p>{{"rePassword dont Match the Password"|translate}}</p>
+          }
+        </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="block mb-1 text-sm font-medium text-heading">{{"Phone : "|translate}}</label>
+        <input
+          formControlName="phone"
+          type="tel"
+          id="phone"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+        />
+        @if(registerForm.get('phone')?.errors && registerForm.get('phone')?.touched){
+        <div
+          class="p-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if(registerForm.get('phone')?.errors?.['required']){
+          <p>{{"The input requird"|translate}}</p>
+          } @else if (registerForm.get('phone')?.errors?.['pattern']){
+          <p>{{"Enter the valiad Phone number (015/011/010/01234567891)"|translate}}</p>
+          }
+        </div>
+        }
+      </div>
+      <button
+        [disabled]="registerForm.invalid"
+        type="submit"
+        id="register"
+        class="btn-main block ms-auto mb-5"
+      >
+        @if(isLoding()){
+        <span><i class="fa-solid fa-spinner fa-spin-pulse"></i></span>
+        }@else {
+        <span>{{"Register"|translate}}</span>
+        }
+      </button>
+    </form>
+  </div>
+</section>

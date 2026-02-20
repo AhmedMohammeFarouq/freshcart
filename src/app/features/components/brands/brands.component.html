@@ -1,0 +1,52 @@
+<section class="bg-gray-50 py-10 rounded">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Title -->
+    <div class="mb-9">
+      <h2 class="text-3xl font-bold text-gray-800 mb-3">{{ 'Our Brands' | translate }}</h2>
+      <p class="text-gray-500">{{ 'Explore products from top trusted brands' | translate }}</p>
+    </div>
+
+
+
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        @for(item of allBrands(); track item._id){
+                  <!-- Product Card -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden group">
+          <!-- Image -->
+          <div class="relative">
+            <img
+              [src]="item.image"
+              class="w-full h-56 object-cover"
+            />
+
+            <!-- Discount Badge -->
+            <span
+              class="absolute top-3 left-3 text-green-700 hover:text-red-500 text-xs font-semibold px-2 py-1 rounded"
+            >
+
+                   <i class="fa-regular fa-heart fa-xl group-hover:text-red-500 group-hover:fa-solid"></i>
+            </span>
+
+            <!-- Hover Actions -->
+            <div
+              class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-3"
+            >
+              <button class="bg-white px-4 py-2 rounded-lg text-sm font-semibold">{{"View"|translate}}</button>
+
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-4 space-y-2">
+
+            <!-- Title -->
+            <h3 class="font-semibold text-gray-800 line-clamp-1">{{item.name}}</h3>
+          </div>
+        </div>
+        }
+
+      </div>
+
+  </div>
+</section>

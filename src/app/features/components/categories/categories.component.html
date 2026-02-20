@@ -1,0 +1,70 @@
+<section class="bg-gray-50 mb-6 rounded py-16">
+  <div class="max-w-7xl mx-auto px-6 space-y-20">
+    <!-- ================= Category ================= -->
+    <div>
+      <div class="flex items-center justify-between mb-10">
+        <h2 class="text-3xl font-bold text-gray-800">{{"All Categories"|translate}}</h2>
+
+        <!-- Search -->
+        <div class="my-6 md:w-1/2 w-full md:flex">
+          <div class="md:w-3/4">
+            <input
+              class="w-full px-4 py-3 rounded-lg border border-green-700 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-300 transition"
+
+              placeholder="{{'serch by producr name or price'|translate}}"
+            />
+          </div>
+          <!-- <div class="ms-2 mt-1">
+            <select
+              [(ngModel)]="selectedOption"
+              class="p-2 rounded bg-green-500 w-fit hover:bg-green-700"
+            >
+              <option value="" class="hidden">Search by.......</option>
+              <option value="name">Name</option>
+              <option value="price">Pirse</option>
+            </select>
+          </div> -->
+        </div>
+      </div>
+      <!-- Products -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        @for(item of allCateg(); track item._id){
+                  <!-- Product Card -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden group">
+          <!-- Image -->
+          <div class="relative">
+            <img
+              [src]="item.image"
+              class="w-full h-56 object-cover"
+            />
+
+            <!-- Discount Badge -->
+            <span
+              class="absolute top-3 left-3 text-green-700 hover:text-red-500 text-xs font-semibold px-2 py-1 rounded"
+            >
+
+                   <i class="fa-regular fa-heart fa-xl group-hover:text-red-500 group-hover:fa-solid"></i>
+            </span>
+
+            <!-- Hover Actions -->
+            <div
+              class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-3"
+            >
+              <button class="bg-white px-4 py-2 rounded-lg text-sm font-semibold">{{"View"|translate}}</button>
+
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-4 space-y-2">
+
+            <!-- Title -->
+            <h3 class="font-semibold text-gray-800 line-clamp-1">{{item.name}}</h3>
+          </div>
+        </div>
+        }
+
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,81 @@
+<section class="min-h-screen bg-gray-50 py-12 animate-fadeIn">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-10 animate-slideUp">
+      <h1 class="text-3xl font-bold text-gray-800">{{ 'My Orders' | translate }}</h1>
+      <p class="text-gray-500 mt-2">{{ 'Track and manage your recent orders.' | translate }}</p>
+    </div>
+
+    @for (item of allOrder(); track $index) {
+      <div class="space-y-10 mt-5">
+        <div
+
+          class="bg-white rounded-2xl cursor-pointer shadow-md border border-gray-100 p-6 transition duration-500 hover:shadow-2xl hover:-translate-y-2"
+        >
+          <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 pb-4">
+            <div>
+              <p class="text-sm text-gray-500">{{ 'Order ID' | translate }}</p>
+              <p class="font-semibold text-gray-800">#ORD-{{ item.id }}</p>
+            </div>
+
+            <div>
+              <p class="text-sm text-gray-500">{{ 'Date' | translate }}</p>
+              <p class="font-semibold text-gray-800">{{ item.createdAt | date: 'dd MMM yyyy' }}</p>
+            </div>
+
+            <div>
+              <p class="text-sm text-gray-500">{{ 'Total' | translate }}</p>
+              <p class="font-semibold text-gray-800">
+                {{ item.totalOrderPrice }} {{ 'EGP' | translate }}
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm text-gray-500">{{ 'payment Method' | translate }}</p>
+              <p class="font-semibold text-gray-800">{{ item.paymentMethodType }}</p>
+            </div>
+
+            <span
+              class="px-4 py-1 text-sm rounded-full bg-green-100 text-green-600 font-medium animate-pulse"
+            >
+              {{ 'Delivered' | translate }}
+            </span>
+            <button
+                (click)="toggleOrder(item.id)"
+              class="px-6 py-2 text-sm cursor-pointer rounded-lg border border-gray-300 transition duration-300 hover:bg-gray-100 hover:scale-105"
+            >
+              {{ 'View Details' | translate }}
+            </button>
+          </div>
+        </div>
+        @if (selectedOrderId === item.id) {
+          <div class="bg-gray-50 rounded-2xl p-6 shadow-inner border border-gray-100 ">
+            @for (product of item.cartItems; track $index) {
+              <div class="flex justify-between items-center border-b pb-3 mb-3">
+                <div class="flex items-center gap-4">
+                  <img
+                    [src]="product.product.imageCover"
+                    class="w-14 h-14 rounded-lg object-cover"
+                  />
+
+                  <div>
+                    <p class="font-medium text-gray-800">
+                      {{ product.product.title }}
+                    </p>
+                    <p class="text-sm text-gray-500">{{"Qty:"|translate}} {{ product.count }}</p>
+                  </div>
+                </div>
+
+                <p class="font-semibold text-gray-700">{{ product.price }} {{"EGP"|translate}}</p>
+              </div>
+            }
+
+            <div class="flex justify-between font-bold text-lg mt-4">
+              <span>{{"Total"|translate}}</span>
+              <span>{{ item.totalOrderPrice }} {{"EGP"|translate}}</span>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>

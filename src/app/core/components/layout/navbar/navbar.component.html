@@ -1,0 +1,436 @@
+<nav class="bg-gray-100 fixed w-full z-20 top-0 start-0 border-b border-default">
+  <div class="max-w-11/12 flex flex-wrap items-center justify-between mx-auto md:p-3 p-0">
+    <a [routerLink]="['home']" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="images/freshcart-logo.svg" class="h-7" alt="freshcart Logo" />
+    </a>
+
+    <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+      <ul class="flex items-center m-0">
+        <li class="md:block">
+          <a
+
+            class="px-[1px] hover:text-green-600 text-sm cursor-pointer"
+            aria-label="Instagram"
+            title="Instagram"
+          >
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a
+
+            class="px-[1px] hover:text-green-600 text-sm cursor-pointer"
+            aria-label="Facebook"
+            title="Facebook"
+          >
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+
+          <a
+
+            class="px-[1px] hover:text-green-600 text-sm cursor-pointer"
+            aria-label="Messenger"
+            title="Messenger"
+          >
+            <i class="fa-brands fa-facebook-messenger"></i>
+          </a>
+
+          <a
+
+            class="px-1 hover:text-green-600 text-sm cursor-pointer"
+            aria-label="twitter"
+            title="twitter"
+          >
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="#" class="px-1 hover:text-green-600" aria-label="TikTok" title="TikTok">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+        </li>
+        @if (!isLogin) {
+          <li>
+            <a
+              [routerLink]="['register']"
+              routerLinkActive="text-green-600"
+              class="md:mx-3 mx-1 text-black rounded hover:text-green-600 text-sm cursor-pointer"
+              >{{ 'Register' | translate }}</a
+            >
+          </li>
+          <li>
+            <a
+              [routerLink]="['login']"
+              routerLinkActive="text-green-600"
+              class="md:mx-3 mx-1 text-black rounded hover:text-green-600 text-sm cursor-pointer"
+              >{{ 'Login' | translate }}</a
+            >
+          </li>
+        } @else {
+          <li>
+            <button
+              [routerLink]="['cart']"
+              routerLinkActive="text-green-600"
+              type="button"
+              class="relative cursor-pointer text-green-600 box-border border border-transparent hover:text-green-900 font-medium leading-5 rounded-full text-sm focus:outline-none"
+            >
+              <i class="fas fa-cart-shopping fa-xl"></i>
+              <span class="sr-only">Notifications</span>
+              <div
+                class="absolute inline-flex items-center justify-center md:w-5 w-4 md:h-5 h-4 text-[8px] md:text-xs font-bold text-white bg-danger border-2 border-buffer rounded-full -top-2 -end-2"
+              >
+                {{ cartItem() }}
+              </div>
+            </button>
+          </li>
+          <li class="md:ms-8 ms-2 ">
+            <button
+              id="dropdownAvatarNameButton"
+              data-dropdown-toggle="dropdownAvatarName"
+              class="flex cursor-pointer items-center text-sm pe-1 font-medium text-heading rounded-full hover:text-green-600 md:me-0 focus:ring-4 focus:ring-neutral-tertiary"
+              type="button"
+            >
+              <span class="sr-only">Open user menu</span>
+              <img
+                class="w-5 h-5 me-2 rounded-full"
+                src="images/user-icon-profile-icon-account-icon-login-sign-line-vector.jpg"
+                alt="user photo"
+              />
+              {{ userName.split(' ').slice(0, 1).join(' ') }}
+              <svg
+                class="w-4 h-4 ms-2"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 9-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            <!-- Dropdown menu -->
+            <div
+              id="dropdownAvatarName"
+              class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-72"
+            >
+              <div class="p-2">
+                <div
+                  class="flex items-center px-2.5 p-2 space-x-1.5 text-sm bg-neutral-secondary-strong rounded"
+                >
+                  <img
+                    class="w-8 h-8 rounded-full"
+                    src="images/user-icon-profile-icon-account-icon-login-sign-line-vector.jpg"
+                    alt="Rounded avatar"
+                  />
+                  <div class="text-sm">
+                    <div class="font-medium text-heading">{{ userName }}</div>
+                    <div class="truncate text-body">name@flowbite.com</div>
+                  </div>
+                  <span
+                    class="bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded ms-auto"
+                    >PRO</span
+                  >
+                </div>
+              </div>
+              <ul
+                class="px-2 pb-2 text-sm text-body font-medium"
+                aria-labelledby="dropdownAvatarNameButton"
+              >
+                <li>
+                  <a
+                    href="#"
+                    class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                  >
+                    <svg
+                      class="w-4 h-4 me-1.5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-width="2"
+                        d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                      />
+                    </svg>
+                    {{ 'Account' | translate }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                  >
+                    <svg
+                      class="w-4 h-4 me-1.5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        d="M20 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6h-2m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4"
+                      />
+                    </svg>
+                    {{ 'Settings' | translate }}
+                  </a>
+                </li>
+                <li class="cursor-pointer">
+                  <div class="flex gap-2">
+                    <i class="fa-solid fa-language mt-1 ms-2 me-2"></i>
+                    {{ 'Language' | translate }}
+                    <button
+                      (click)="myTranslateService.changLang('ar')"
+                      class="cursor-pointer px-3 py-1 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-100"
+                    >
+                      {{ 'Arabic' | translate }}
+                    </button>
+
+                    <button
+                      (click)="myTranslateService.changLang('en')"
+                      class="cursor-pointer px-3 py-1 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-100"
+                    >
+                      {{ 'English' | translate }}
+                    </button>
+                  </div>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                  >
+                    <svg
+                      class="w-4 h-4 me-1.5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 5.365V3m0 2.365a5.338 5.338 0 0 1 5.133 5.368v1.8c0 2.386 1.867 2.982 1.867 4.175 0 .593 0 1.292-.538 1.292H5.538C5 18 5 17.301 5 16.708c0-1.193 1.867-1.789 1.867-4.175v-1.8A5.338 5.338 0 0 1 12 5.365ZM8.733 18c.094.852.306 1.54.944 2.112a3.48 3.48 0 0 0 4.646 0c.638-.572 1.236-1.26 1.33-2.112h-6.92Z"
+                      />
+                    </svg>
+                    {{ 'Notifications' | translate }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                  >
+                    <svg
+                      class="w-4 h-4 me-1.5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                      />
+                    </svg>
+                    {{ 'Help center' | translate }}
+                  </a>
+                </li>
+                <li
+                  class="flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded mb-1.5"
+                >
+                  <a href="#" class="inline-flex items-center">
+                    <svg
+                      class="w-4 h-4 me-1.5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 21a9 9 0 0 1-.5-17.986V3c-.354.966-.5 1.911-.5 3a9 9 0 0 0 9 9c.239 0 .254.018.488 0A9.004 9.004 0 0 1 12 21Z"
+                      />
+                    </svg>
+                    {{ 'Dark mode' | translate }}
+                  </a>
+                  <label class="inline-flex items-center cursor-pointer ms-auto">
+                    <input type="checkbox" value="" class="sr-only peer" />
+                    <div
+                      class="relative w-9 h-5 bg-neutral-quaternary peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-soft dark:peer-focus:ring-brand-soft rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand"
+                    ></div>
+                    <span class="ms-3 text-sm font-medium text-heading sr-only">Toggle me</span>
+                  </label>
+                </li>
+                <li class="border-t border-default-medium pt-1.5">
+                  <a
+                    href="#"
+                    class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                  >
+                    <svg
+                      class="w-4 h-4 me-1.5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m10.051 8.102-3.778.322-1.994 1.994a.94.94 0 0 0 .533 1.6l2.698.316m8.39 1.617-.322 3.78-1.994 1.994a.94.94 0 0 1-1.595-.533l-.4-2.652m8.166-11.174a1.366 1.366 0 0 0-1.12-1.12c-1.616-.279-4.906-.623-6.38.853-1.671 1.672-5.211 8.015-6.31 10.023a.932.932 0 0 0 .162 1.111l.828.835.833.832a.932.932 0 0 0 1.111.163c2.008-1.102 8.35-4.642 10.021-6.312 1.475-1.478 1.133-4.77.855-6.385Zm-2.961 3.722a1.88 1.88 0 1 1-3.76 0 1.88 1.88 0 0 1 3.76 0Z"
+                      />
+                    </svg>
+                    {{ 'Upgrade to PRO' | translate }}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    (click)="authService.logOut()"
+                    class="inline-flex items-center w-full p-2 text-fg-danger hover:bg-neutral-tertiary-medium rounded"
+                  >
+                    <svg
+                      class="w-4 h-4 me-1.5"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"
+                      />
+                    </svg>
+                    {{ 'Logout' | translate }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <!-- <li>
+          <a (click)="authService.logOut()" class="cursor-pointer md:mx-3 mx-1 text-black rounded hover:bg-neutral-tertiary text-sm">Logout</a>
+        </li> -->
+        }
+      </ul>
+      <button
+        data-collapse-toggle="navbar-sticky"
+        type="button"
+        (click)="toggleMenu()"
+        class="inline-flex items-center w-10 h-10 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary"
+        aria-controls="navbar-sticky"
+        aria-expanded="false"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          class="w-6 h-6"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+            d="M5 7h14M5 12h14M5 17h14"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+      id="navbar-sticky"
+      [class.hidden]="!isMenuOpen"
+    >
+      <ul
+        class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-default rounded-base md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0"
+      >
+        <li>
+          <a
+            [routerLink]="['home']"
+            routerLinkActive="text-green-600"
+            (click)="isMenuOpen = false"
+            class="block py-2 px-3 text-black rounded-sm capitalize md:bg-transparent md:p-0"
+            aria-current="page"
+            >{{ 'Home' | translate }}</a
+          >
+        </li>
+        @if (isLogin) {
+          <li>
+            <a
+              [routerLink]="['cart']"
+              routerLinkActive="text-green-600"
+              (click)="isMenuOpen = false"
+              class="block py-2 px-3 text-black rounded hover:text-green-600 md:border-0 capitalize md:p-0 md:dark:hover:bg-transparent"
+              >{{ 'cart' | translate }}</a
+            >
+          </li>
+        }
+
+        <li>
+          <a
+            [routerLink]="['products']"
+            routerLinkActive="text-green-600"
+            (click)="isMenuOpen = false"
+            class="block py-2 px-3 text-black rounded hover:text-green-600 md:border-0 capitalize md:p-0 md:dark:hover:bg-transparent"
+            >{{ 'products' | translate }}</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['categories']"
+            routerLinkActive="text-green-600"
+            (click)="isMenuOpen = false"
+            class="block py-2 px-3 text-black rounded hover:text-green-600 md:border-0 capitalize md:p-0 md:dark:hover:bg-transparent"
+            >{{ 'categories' | translate }}</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['brands']"
+            routerLinkActive="text-green-600"
+            (click)="isMenuOpen = false"
+            [class]="(lang()=='ar')?'block ms-6 py-2 px-3 text-black rounded hover:text-green-600 md:border-0 capitalize md:p-0 md:dark:hover:bg-transparent':'block py-2 px-3 text-black rounded hover:text-green-600 md:border-0 capitalize md:p-0 md:dark:hover:bg-transparent' "
+            >{{ 'brands' | translate }}</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

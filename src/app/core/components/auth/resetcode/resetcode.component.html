@@ -1,0 +1,52 @@
+
+
+@if(resetPasswortFalg()){
+    <section class="w-3/4 mx-auto">
+  <div>
+    <h1 class="text-xl font-bold my-5">Code in Your Email :</h1>
+    @if(errMsg()){
+    <div class="p-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+      <p>{{ errMsg() }}</p>
+    </div>
+    }
+  </div>
+  <form [formGroup]="resetCodeFormGroup" >
+    <div class="mb-3">
+      <label for="code" class="block mb-1 text-sm font-medium text-heading">Code is : </label>
+      <input
+        formControlName="resetCode"
+        type="string"
+        id="code"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+      />
+      @if(resetCodeFormGroup.get('resetCode')?.errors &&
+      resetCodeFormGroup.get('resetCode')?.touched){
+      <div class="p-2 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        @if(resetCodeFormGroup.get('resetCode')?.errors?.['required']){
+        <p>The input requird</p>
+        }
+      </div>
+      }
+    </div>
+    <div>
+      <button
+      (click)="send()"
+        [disabled]="resetCodeFormGroup.invalid"
+        type="submit"
+        id="register"
+        class="btn-main block ms-auto mb-5"
+      >
+        @if(isLoding()){
+        <span><i class="fa-solid fa-spinner fa-spin-pulse"></i></span>
+        }@else {
+        <span>Send</span>
+        }
+      </button>
+    </div>
+  </form>
+
+</section>
+}
+@if(resetNewPasswortFalg()){
+  <app-resetnewpassword></app-resetnewpassword>
+}

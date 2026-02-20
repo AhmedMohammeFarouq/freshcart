@@ -1,0 +1,63 @@
+<section class="w-3/4 mx-auto">
+  <div>
+    <h1 class="text-xl font-bold my-5">{{"Login Now:"|translate}}</h1>
+    @if(errMsg()){
+    <div class="p-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+      <p>{{ errMsg() }}</p>
+    </div>
+    }
+  </div>
+  <form [formGroup]="loginFormGroupe" (ngSubmit)="subBut()">
+    <div class="mb-3">
+      <label for="email" class="block mb-1 text-sm font-medium text-heading">{{"Email :"|translate}} </label>
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+      />
+      @if(loginFormGroupe.get('email')?.errors && loginFormGroupe.get('email')?.touched){
+      <div class="p-2 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        @if(loginFormGroupe.get('email')?.errors?.['required']){
+        <p>{{"The input requird"|translate}}</p>
+        }@else if(loginFormGroupe.get('email')?.errors?.['email']){
+        <p>{{"Plaece Enter valid email"|translate}}</p>
+        }
+      </div>
+      }
+    </div>
+    <div class="mb-3">
+      <label for="password" class="block mb-1 text-sm font-medium text-heading">{{"Password :"|translate}} </label>
+      <input
+        formControlName="password"
+        type="password"
+        id="password"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+      />
+      @if(loginFormGroupe.get('password')?.errors && loginFormGroupe.get('password')?.touched){
+      <div class="p-2 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        @if(loginFormGroupe.get('password')?.errors?.['required']){
+        <p>{{"The input requird"|translate}}</p>
+        }@else if(loginFormGroupe.get('password')?.errors?.['pattern']){
+        <p>{{"Plaece Enter valid Password"|translate}}</p>
+        }
+      </div>
+      }
+    </div>
+    <div>
+      <a routerLink="/forgetpassword" class="text-blue-600 underline ">{{"Forget Password"|translate}}</a>
+      <button
+        [disabled]="loginFormGroupe.invalid"
+        type="submit"
+        id="register"
+        class="btn-main block ms-auto mb-5"
+      >
+        @if(isLoding()){
+        <span><i class="fa-solid fa-spinner fa-spin-pulse"></i></span>
+        }@else {
+        <span>{{"Login"|translate}}</span>
+        }
+      </button>
+    </div>
+  </form>
+</section>

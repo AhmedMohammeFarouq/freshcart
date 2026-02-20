@@ -1,0 +1,165 @@
+@if (sumOrder()) {
+  <section class="w-9/12 mx-auto">
+    <h1 class="font-bold md:text-2xl mt:12 pt-6">{{ 'Address Details :' | translate }}</h1>
+
+    <form [formGroup]="shippingAddressForm">
+      <div class="mb-3 md:mt-5 mt-3">
+        <label for="details" class="block mb-1 text-sm font-medium text-heading"
+          >{{ 'Details :' | translate }}
+        </label>
+        <input
+          formControlName="details"
+          type="text"
+          id="details"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+        />
+        @if (
+          shippingAddressForm.get('details')?.errors && shippingAddressForm.get('details')?.touched
+        ) {
+          <div
+            class="p-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+            role="alert"
+          >
+            @if (shippingAddressForm.get('details')?.errors?.['required']) {
+              <p>{{ 'The input requird' | translate }}</p>
+            }
+          </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="block mb-1 text-sm font-medium text-heading">{{
+          'Phone : ' | translate
+        }}</label>
+        <input
+          formControlName="phone"
+          type="tel"
+          id="phone"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+        />
+        @if (
+          shippingAddressForm.get('phone')?.errors && shippingAddressForm.get('phone')?.touched
+        ) {
+          <div
+            class="p-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+            role="alert"
+          >
+            @if (shippingAddressForm.get('phone')?.errors?.['required']) {
+              <p>{{ 'The input requird' | translate }}</p>
+            } @else if (shippingAddressForm.get('phone')?.errors?.['pattern']) {
+              <p>{{ 'Enter the valiad Phone number (015/011/010/01234567891)' | translate }}</p>
+            }
+          </div>
+        }
+      </div>
+      <div class="mb-3 mt-5">
+        <label for="city" class="block mb-1 text-sm font-medium text-heading"
+          >{{ 'city :' | translate }}
+        </label>
+        <input
+          formControlName="city"
+          type="text"
+          id="city"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-green-600 focus:border-green-600 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+        />
+        @if (shippingAddressForm.get('city')?.errors && shippingAddressForm.get('city')?.touched) {
+          <div
+            class="p-1 mb-4 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+            role="alert"
+          >
+            @if (shippingAddressForm.get('city')?.errors?.['required']) {
+              <p>{{ 'The input requird' | translate }}</p>
+            }
+          </div>
+        }
+      </div>
+
+      <button
+        [disabled]="shippingAddressForm.invalid"
+        (click)="submitShippingAddressForm()"
+        type="submit"
+        id="register"
+        class="btn-main inline block mb-5 me-5"
+      >
+        @if (isLoding()) {
+          <span><i class="fa-solid fa-spinner fa-spin-pulse"></i></span>
+        } @else {
+          <span> {{ 'Checkout' | translate }}</span>
+        }
+      </button>
+      <button
+        [disabled]="shippingAddressForm.invalid"
+        (click)="submitShippingAddressFormOnline()"
+        type="submit"
+        id="register"
+        class="btn-main inline mb-5"
+      >
+        @if (isLoding()) {
+          <span><i class="fa-solid fa-spinner fa-spin-pulse"></i></span>
+        } @else {
+          <span> {{ 'Visa payment' | translate }}</span>
+        }
+      </button>
+
+    </form>
+  </section>
+} @else {
+  <section class="w-full bg-gray-50 py-10">
+    <div class="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">
+        {{ 'Order Summary' | translate }}
+      </h2>
+
+      @for (item of cartProducts().products; track $index) {
+        <div class="flex justify-between items-center mb-4">
+          <div>
+            <h3 class="font-semibold text-gray-700">
+              {{ item.product.title.split(' ').slice(0, 2).join(' ') }}
+            </h3>
+            <p class="text-sm text-gray-500">{{ 'Qty:' | translate }} {{ item.count }}</p>
+          </div>
+          <span class="font-semibold text-gray-800"
+            >{{ item.price * item.count }} {{ 'EGP' | translate }}</span
+          >
+        </div>
+      }
+
+      <!-- Divider -->
+      <div class="border-t my-4"></div>
+
+      <div class="flex justify-between mb-2 text-gray-600">
+        <span>{{ 'Subtotal' | translate }}</span>
+        <span>{{ cartProducts().totalCartPrice }} {{ 'EGP' | translate }} </span>
+      </div>
+
+      <!-- Shipping -->
+      <div class="flex justify-between mb-2 text-gray-600">
+        <span>{{ 'Shipping' | translate }}</span>
+        <span>---</span>
+      </div>
+
+      <!-- Discount (Optional) -->
+      <div class="flex justify-between mb-2 text-green-600">
+        <span>{{ 'Discount' | translate }}</span>
+        <span>---</span>
+      </div>
+
+      <div class="border-t mt-4 pt-4 flex justify-between items-center">
+        <span class="text-lg font-bold text-gray-800">{{ 'Total' | translate }}</span>
+        <span class="text-xl font-bold text-gray-900"
+          >{{ cartProducts().totalCartPrice }} {{ 'EGP' | translate }}</span
+        >
+      </div>
+
+      <!-- Cash Notice -->
+      <div class="mt-4 bg-green-50 text-green-700 text-sm p-3 rounded-lg">
+        {{ 'You will pay this amount in cash upon delivery' | translate }}
+      </div>
+      <button
+    (click)=" goToAllOrders() "
+        class="w-full mt-2 bg-green-700 hover:bg-green-800 text-white py-3 rounded-xl font-semibold transition cursor-pointer"
+      >
+        {{ 'All Orders' | translate }}
+      </button>
+    </div>
+  </section>
+}

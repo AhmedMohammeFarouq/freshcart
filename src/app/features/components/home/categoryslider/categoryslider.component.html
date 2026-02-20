@@ -1,0 +1,14 @@
+<section class="md:mt-2 mb-10">
+  <div>
+    <h2 class="text-green-700 text-base font-medium  md:mb-3">{{"Show Popular Categories"|translate}}:</h2>
+  </div>
+</section>
+
+<owl-carousel-o [options]="customOptions">
+  @for (slide of allCateg(); track slide._id) {
+    <ng-template carouselSlide [id]="slide._id">
+      <img [src]="slide.image" class="h-[150px] rounded px-1 object-cover" />
+      <h3 class="text-sm font-smole ms-2">{{ slide.name }}</h3>
+    </ng-template>
+  }
+</owl-carousel-o>
