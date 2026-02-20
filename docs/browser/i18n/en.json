@@ -1,0 +1,20 @@
+{
+  "Home": "Home",
+  "cart": "cart",
+  "products": "products",
+  "categories": "categories",
+  "brands": "brands",
+  "Logout": "Logout",
+  "Login": "Login",
+  "Register": "Register",
+  "EN": "EN",
+  "AR": "AR",
+  "Products": "Products",
+  "Search by.......":"Search by.......",
+  "serch by producr name or price":"serch by producr name or price",
+  "Show Popular Categories":"Show Popular Categories",
+  "All Products":"All Products",
+  "Shopping Cart":"Shopping Cart",
+  "Order Summary":"Order Summary",
+  "Total":"Total"
+}
